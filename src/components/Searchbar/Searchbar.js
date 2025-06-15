@@ -84,7 +84,7 @@ const Searchbar = (props) => {
                     <input name="date" onChange={handleInputChange} type="date" className={styles.searchInput} /> 
                 </div>
 
-                <button className={styles.searchButton} onClick={handleSearch}>Search</button>
+                <button className={styles.searchButton} onClick={handleSearch}>Tìm kiếm</button>
             </div>
         </div>
     );

@@ -27,7 +27,7 @@ function Header(props) {
             <div className="header__circle-button" onClick={openVideoPopup}>
                 <div className="header__play-icon" ></div>
             </div>
-            <p className='header__watch-text' onClick={openVideoPopup}>Watch video</p>
+            <p className='header__watch-text' onClick={openVideoPopup}>Xem video</p>
             </div>
         </div>
         <Searchbar/>
