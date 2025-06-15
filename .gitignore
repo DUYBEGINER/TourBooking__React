@@ -53,7 +53,7 @@ pnpm-lock.yaml
 # Bỏ qua các file hệ thống
 .DS_Store
 Thumbs.db
-
+deploy.yml
 # Bỏ qua các file log và cache
 logs/
 *.log
@@ -99,5 +99,6 @@ debug.log
 # Nếu dùng MacOS
 .idea/
 *.iml
+
 
 

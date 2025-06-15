@@ -12,17 +12,14 @@ import { useNavigate } from "react-router-dom";
 
 
 function PromotionFilterEmployee({
-    searchPlaceholder = "Tìm kiếm theo mã khuyến mãi",
     selectedItems = [],
     onBlockSelected,
     onFilterChange,
 }) {
     const navigate = useNavigate();
-    console.log(" onFilterChange:", {
-        searchPlaceholder,
-    });
+    
 
-
+    // Define occupancy filters
     const occupancyFilters = [
         { key: 'all', label: 'Tất cả' },
         { key: 'active', label: 'Đang hoạt động' },
@@ -32,7 +29,7 @@ function PromotionFilterEmployee({
 
     const handleBlockSelected = () => {
         if(onBlockSelected && selectedItems.length > 0) {
-            onBlockSelected(selectedItems);
+            onBlockSelected();
         }
     }
 
@@ -62,7 +59,7 @@ function PromotionFilterEmployee({
                 <div className="filter__search">
                     <SearchFilter 
                         onSearch={handleSearch} 
-                        placeholder={searchPlaceholder} 
+                        placeholder="Tìm kiếm theo mã khuyến mãi"
                     />
                 </div>
                 <ButtonToolbar aria-label="Toolbar with button groups" className="filter__button-toolbar">

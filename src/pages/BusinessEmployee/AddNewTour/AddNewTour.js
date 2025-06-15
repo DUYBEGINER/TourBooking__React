@@ -28,9 +28,13 @@ function AddTourPage() {
   const { user } = useContext(AuthContext);
 
   // Extract tour details for edit mode
-  const tourDetail = location.state?.tourDetail || null;
-  const isEditMode = !!tourDetail;
+  const tourDetail = location.state?.tourDetail || null; 
+  //Check trạng thái để xác định có thể chỉnh sửa/ thêm tour được hay không
+  const matchStatus = ((tourDetail?.status) ? (['active', 'upcoming'].includes(tourDetail.status)) : true); 
 
+  const isEditMode = !!tourDetail;
+  
+  console.log("Tour detail: ", tourDetail);
   // Custom hooks
   const { alert, showAlert } = useAlert();
   const {
@@ -247,6 +251,7 @@ function AddTourPage() {
             className="mt-3 p-20-50"
             style={{ display: "block", marginLeft: 'auto' }}
             type="submit"
+            disabled={!matchStatus} // Disable if tourDetail is not set
           >
             {isEditMode ? 'Cập Nhật Tour' : 'Thêm Tour'}
           </Button>

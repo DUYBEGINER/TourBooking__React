@@ -23,7 +23,7 @@ const ResponeDetail = () => {
     const { supportRequests, sendResponse } = useConsultantSupport();
 
     // Giả lập employeeId, thực tế nên lấy từ context đăng nhập
-    const employeeId = 'EMP001';
+    const employeeId = 'EMP003';
 
     useEffect(() => {
         const foundRequest = supportRequests.find(r => String(r.request_id) === String(id));

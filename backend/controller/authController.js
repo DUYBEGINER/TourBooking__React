@@ -42,8 +42,8 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
     try{
-        const { fullname, email, password, phone, date_of_birth } = req.body;
-        const user = await registerUser(fullname, email, password, phone, date_of_birth);
+        const { fullname, email, password, phone, birthday } = req.body;
+        const user = await registerUser(fullname, email, password, phone, birthday);
 
         //Nếu có lỗi trong quá trình đăng ký
         if (user?.error) {

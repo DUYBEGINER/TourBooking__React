@@ -42,7 +42,7 @@ const authInputs = {
         },
         {
             id: 4,
-            name: "date_of_birth",
+            name: "birthday",
             type: "date",
             placeholder: "Ngày sinh",
             errorMessage: {

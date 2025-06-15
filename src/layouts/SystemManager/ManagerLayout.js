@@ -50,11 +50,11 @@ function ManagerLayout() {
 
         {/* Nội dung chính */}
         <Col xs={10} className="Manager__content  p-0">
-          {/* Hàng 1: Header */}
+          {/* Hàng 1: NavBar của quản lí */}
           <div className="Manager__navbar">
             <NavBarAdmin user={user} header={layoutType.header} />
           </div>
-          {/* Hàng 2: Nội dung chính */}
+          {/* Hàng 2: Thông tin chính */}
           <div className="Manager__main-content">
             <Outlet />
           </div>

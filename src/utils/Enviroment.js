@@ -1,0 +1,4 @@
+export const Enviroment = {
+    GOOGLE_CLIENT_AUTH_ID: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_AUTH_SECRET: process.env.REACT_APP_GOOGLE_CLIENT_SECRET
+};

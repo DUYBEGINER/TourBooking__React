@@ -11,7 +11,7 @@ function Register() {
     username: '',
     phone: '',
     email: '',
-    date_of_birth: '',
+    birthday: '',
     password: '',
     confirmPassword: ''
   });
@@ -58,8 +58,8 @@ function Register() {
     }
 
     // Kiểm tra tuổi
-    if (values.date_of_birth) {
-      const age = calculateAge(values.date_of_birth);
+    if (values.birthday) {
+      const age = calculateAge(values.birthday);
       if (age < 18) {
         setError("Bạn phải trên 18 tuổi để đăng ký!");
         return;
@@ -73,7 +73,7 @@ function Register() {
       //Reset lại các state
       setError(null);
       setErrorCode(null);
-      await regist(values.username, values.email, values.password, values.phone, values.date_of_birth);
+      await regist(values.username, values.email, values.password, values.phone, values.birthday);
       setSuccess("Đăng ký thành công! Chuyển hướng về trang chủ.");
       // setValues({ username: '', phone: '', email: '', password: '', confirmPassword: '' });
     } catch (error) {

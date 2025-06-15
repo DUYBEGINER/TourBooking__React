@@ -1,0 +1,93 @@
+// .infor_CustomerPage{
+//     height: 100vh;
+//     .infor_CustomerContainer{
+//         padding: 2rem;
+//         background-color: #ffffff;
+//         border-radius: 0.5rem;
+//         .avatar-image{
+//             width: 100px;
+//             height: 100px;
+//             border-radius: 50%;
+//             object-fit: cover;
+//             margin-bottom: 1rem;
+//         }
+//         .update-btn{
+//             background-color: #26ADA6;
+//             color: #ffffff;
+//             border: none;
+//             padding: 0.5rem 1rem;
+//             border-radius: 0.25rem;
+//             cursor: pointer;
+//             &:hover {
+//                 background-color: #1f8f8a;
+//             }
+//         }
+//         .block-btn{
+//             background-color: #dc3545;
+//             color: #ffffff;
+//             border: none;
+//             padding: 0.5rem 1rem;
+//             border-radius: 0.25rem;
+//             cursor: pointer;
+//             &:hover {
+//                 background-color: #c82333;
+//             }
+//         }
+//     }
+// }
+.infor_CustomerPage {
+    
+
+    .infor_CustomerContainer {
+        padding: 2rem;
+        background-color: #ffffff;
+        border-radius: 0.5rem;
+
+        .title{
+            border-bottom: 1px solid #F49B33;
+           
+        }
+        .avatar-container{
+            .avatar-image {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+                margin: 10px 0;
+            }
+        }
+        
+
+        .update-btn {
+            background-color: #26ADA6;
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #1f8f8a;
+            }
+        }
+
+        .block-btn {
+            background-color: #dc3545;
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #c82333;
+            }
+        }
+
+        .tour-history-container {
+            max-height: 500px; // Giới hạn chiều cao, có thể điều chỉnh
+            overflow-y: auto; // Thêm thanh cuộn dọc khi nội dung vượt quá
+            overflow-x: hidden; // Ẩn thanh cuộn ngang nếu có
+            padding-right: 0.5rem; // Thêm padding để tránh che mất nội dung
+        }
+    }
+}

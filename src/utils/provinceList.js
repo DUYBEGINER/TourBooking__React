@@ -1,5 +1,5 @@
 export const provinceList = [
-    { value: 'TP HCM' },
+    { value: 'TP.HCM' },
     { value: 'Hà Nội' },
     { value: 'Đà Nẵng' },
     { value: 'An Giang' },

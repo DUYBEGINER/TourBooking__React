@@ -1,38 +1,41 @@
 import React from 'react';
 import { useEffect, useRef } from 'react';
+import {GoogleLogin} from '@react-oauth/google';
+
 
 function SocialLogin(props) {
 
-    useEffect(() => {
-      // Tải script Google Identity Services
+  const { handleGoogleSignIn}= props;
+    // useEffect(() => {
+    //   // Tải script Google Identity Services
     
-      const script = document.createElement('script');
-      script.src = 'https://accounts.google.com/gsi/client';
-      script.async = true;
-      document.body.appendChild(script);
+    //   const script = document.createElement('script');
+    //   script.src = 'https://accounts.google.com/gsi/client';
+    //   script.async = true;
+    //   document.body.appendChild(script);
 
-      // Khởi tạo Google Sign-In khi script tải xong
-      script.onload = () => {
+    //   // Khởi tạo Google Sign-In khi script tải xong
+    //   script.onload = () => {
         
-        window.google.accounts.id.initialize({
-          client_id: '678561996244-dhafh8drnjs1ku0dj79ohre8d23nqh47.apps.googleusercontent.com', // Thay bằng Client ID của bạn
-          callback: handleCredentialResponse,
-          // ux_mode: 'redirect',
-          // auto_select: false,
-          // login_uri: 'http://localhost:5000/auth/google-login', // Thay bằng URL callback của bạn
-        });
-          window.google.accounts.id.renderButton(
-            document.getElementById('buttonDiv'),
-            { theme: 'outline', size: 'large'}
-          );
-        // window.google.accounts.id.prompt(); // Hiển thị One Tap prompt
-      };
+    //     window.google.accounts.id.initialize({
+    //       client_id: '678561996244-dhafh8drnjs1ku0dj79ohre8d23nqh47.apps.googleusercontent.com', // Thay bằng Client ID của bạn
+    //       callback: handleCredentialResponse,
+    //       // ux_mode: 'redirect',
+    //       // auto_select: false,
+    //       // login_uri: 'http://localhost:5000/auth/google-login', // Thay bằng URL callback của bạn
+    //     });
+    //       window.google.accounts.id.renderButton(
+    //         document.getElementById('buttonDiv'),
+    //         { theme: 'outline', size: 'large'}
+    //       );
+    //     // window.google.accounts.id.prompt(); // Hiển thị One Tap prompt
+    //   };
 
-      // Dọn dẹp script khi component unmount
-      return () => {
-        document.body.removeChild(script);
-      };
-    }, []); // Chạy một lần khi component mount
+    //   // Dọn dẹp script khi component unmount
+    //   return () => {
+    //     document.body.removeChild(script);
+    //   };
+    // }, []); // Chạy một lần khi component mount
 
 
     function decodeJWT(token) {
@@ -68,13 +71,16 @@ function SocialLogin(props) {
 
     return (
         <div className="socialLogin">
-
+            <GoogleLogin
+              onSuccess={handleGoogleSignIn}
+              onError={(error) => console.error("Google Login Error:", error)}
+            />
            {/* <button onClick={handleGoogleSignIn} className="google-signin-button">
                 <img alt="anh1" src="./google.png" />
                 Đăng nhập bằng Google
             </button>  */}
   
-             <div id="buttonDiv" ></div>
+             {/* <div id="buttonDiv" ></div> */}
         </div>
     );
 }

@@ -7,14 +7,18 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useLocation } from "react-router-dom";
 import { API_URL } from '../utils/API_Port';
+import { FaRegUserCircle } from "react-icons/fa";
+import { LuHistory } from "react-icons/lu";
+import { TbLogout2 } from "react-icons/tb";
+import { FaHistory } from "react-icons/fa";
 import Spinner from 'react-bootstrap/Spinner';
 
 function Navbar({ pageRef }) {
-    const { user, loading } = useContext(AuthContext);
+    const { user, loading, logout } = useContext(AuthContext);
     console.log("Navbar user:", user);
     // State to manage the open/close state of the navbar (mobile view)
     const [isOpen, setIsOpen] = useState(false);
-    
+    const [openDropdown, setOpenDropdown] = useState(false);
     // Kiểm tra xem có phải trang chủ không, nếu không thì sẽ áp dung style not-home
     const location = useLocation();
     const isHomePage = location.pathname === "/";
@@ -56,7 +60,7 @@ function Navbar({ pageRef }) {
                 <h1 className="logo"><Link to="/">Tour Guide</Link></h1>
                 <ul className={`nav-links ${isOpen ? "active" : ""}`}>
                     <li className="btn--close" onClick={() => setIsOpen(!isOpen)}><FaTimes /></li>
-                    <li><a href="#">Về công ty</a></li>
+                    <li><Link to="/about-us">Về công ty</Link></li>
                     <li><Link to="/contact">Liên hệ</Link></li>
                     <li><Link to="/tourFavorite">Tour Yêu thích</Link></li>
                     {!user && loading ? (
@@ -72,15 +76,31 @@ function Navbar({ pageRef }) {
                         </>
                     ) : (
                         <>
-                            <li>
-                                <Link to="/thongtin">
-                                <UserAvatar name={user.name} image={user.avatar} size="50px"/>
-                                </Link>
+                            <li onClick={() => setOpenDropdown(!openDropdown)}>
+                                    <UserAvatar name={user.name} image={user.avatar} size="50px"/>
                             </li>
+                            {/* Dropdown menu for user actions */}
+                            <div className={`nav_dropdown ${openDropdown ? "active" : ""}`}>
+                                <ul className="list_page">
+                                    <li>
+                                        <Link to="/thongtin">
+                                            <div className="menu-item"><FaRegUserCircle size={25}/>Thông tin cá nhân</div>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/historyBooking"><div className="menu-item"><LuHistory size={25}/> Lịch sử đặt tour</div></Link>
+                                    </li>
+                                    <hr style={{ margin: "5px 0" }}></hr>
+                                    <li>
+                                        <Link onClick={logout}><div className="menu-item logout"><TbLogout2 size={25}/> Đăng xuất</div></Link>
+                                    </li>
+                                </ul>
+                            </div>
                         </>
                     )}
+                    
                 </ul>
-
+                
                 <div className="menu-toggle" onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? <FaTimes /> : <FaBars />}
                 </div>

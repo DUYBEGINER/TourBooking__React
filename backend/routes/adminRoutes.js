@@ -17,7 +17,8 @@ const {
   createEmployee,
   getEmployeeById,
   unlockEmployeesByIds,
-  updateEmployee
+  updateEmployee,
+  updateTourStatus
 } = require('../services/adminServices');
 const router = express.Router();
 
@@ -156,8 +157,8 @@ router.put('/employees/unlock', async (req, res) => {
 // Thêm chi nhánh mới
 router.post('/branches', async (req, res) => {
   try {
-    const { branch_name, address, phone, status } = req.body;
-    await createBranch({ branch_name, address, phone, status });
+    const { branch_name, address, phone } = req.body;
+    await createBranch({ branch_name, address, phone });
     res.status(201).json({ message: 'Tạo chi nhánh thành công' });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -186,7 +187,9 @@ router.get("/employees/:id", async (req, res) => {
 
 router.get("/branches/:id", async (req, res) => {
   try {
-    const data = await getBranchDetail(req.params.id);
+    const branchId = req.params.id;
+    const year = req.query.year ? parseInt(req.query.year, 10) : new Date().getFullYear();
+    const data = await getBranchDetail(branchId, year);
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -199,6 +202,16 @@ router.put("/employees/update/:id", async (req, res) => {
   try {
     await updateEmployee(emp_id, { fullname, email, password, phone, address, role_id, branch_id });
     res.json({ message: 'Cập nhật thông tin nhân viên thành công' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 11. Cập nhật trạng thái tour tự động
+router.put('/tours/update-status', async (req, res) => {
+  try {
+    await updateTourStatus();
+    res.json({ message: 'Cập nhật trạng thái tour thành công' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -9,6 +9,13 @@ export const getCustomerAccount = async (filter) => {
     return response.data;
 }
 
+
+export const getCustomerById = async (id) => {
+    const response = await axios.get(`${API_URL}/customers/infor/${id}`, {
+        withCredentials: true // Ensure cookies are sent
+    });
+    return response.data;
+}
 export const updateCustomer = async (id, data) => {
     try{
         

@@ -135,10 +135,10 @@ const EmployeeProfile = () => {
 
   return (
     <div className="profile-page">
-      <div className="page-header">
-        <h2>Thông tin nhân viên</h2>
+      {/* <div className="page-header">
+        <h2>Thông tin nhân viên</h2> 
         <button className="logout-button" onClick={() => navigate('/admin/nhan-vien')}>Quay lại</button>
-      </div>
+      </div> */}
       <div className="profile-card">
         <div className="profile-header">
           <img src="/avt.jpg" alt="Profile Avatar" className="profile-avatar" />
@@ -179,7 +179,14 @@ const EmployeeProfile = () => {
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>Mật khẩu mới</Form.Label>
-                  <Form.Control name="password" type="password" value={form.password} onChange={handleChange} placeholder="Để trống nếu không đổi" />
+                  <Form.Control 
+                    name="password" 
+                    type="password" 
+                    value={form.password} 
+                    onChange={handleChange} 
+                    placeholder="Để trống nếu không đổi"
+                    autocomplete="new-password"
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>Phân quyền</Form.Label>

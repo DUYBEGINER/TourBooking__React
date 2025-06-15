@@ -101,7 +101,7 @@ function Touroutstanding(props) {
 
   // const { getTourOutstanding } = useContext(TourContext);
   const {tours, loading, error, onChangeFavoriteTour} = props;
-
+  console.log('Tours outstanding:', tours);
   if (loading) return <div className='loading'>Đang tải...</div>;
   if (error) return <div className='error'>Lỗi: {error.message}</div>;
 

@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import TourSchedule from '../../components/Common/TourSchedule/TourSchedule';
 import Footer from '../../layouts/Footer';
-import TourList from "../../components/TourList/Tourlist";
+//import TourList from "../../components/TourList/Tourlist";
 import { FaRegHeart } from "react-icons/fa";
 import { RiShareForwardLine } from "react-icons/ri";
 import Navbar from '../../layouts/Navbar';
@@ -39,6 +39,7 @@ function BookingTour(props) {
     const [isLoadingRelatedTours, setIsLoadingRelatedTours] = useState(false); // Loading cho tour liên quan
     const [schedules, setSchedules] = useState([]);
     const [stats, setStats] = useState({}); // Lưu trữ thống kê đánh giá của tour
+    
     const navigate = useNavigate();
     
 
@@ -48,7 +49,6 @@ function BookingTour(props) {
             navigate('/unauthorized', { replace: true }); // Redirect to tours list page
             return;
         }
-
         window.scrollTo(0, 0);
         setTours([]);
         setImages([]);
@@ -59,46 +59,17 @@ function BookingTour(props) {
     }, [tourId, navigate]);
 
 
-    console.log("BookingTour component rendered");
-    const currentTour = {
-        name: tour.name,
-        start: tour.start_date,
-        code: "43210",
-        date: "24/03/2025",
-        priceAdult: 4129000,
-        priceChild: 1990000,
-        priceBaby: 0,
-        image: "https://i.imgur.com/e2UnpdB.jpg"
-    };
-
      // Cuộn về đầu trang và reset trạng thái khi tourId thay đổi
     
-    //  //Hàm để lấy danh sách tour liên quan 
-    // const fetchRelatedTours = async () => {
-    //     console.log("Fetching related tours for tourId:", tourId);
-    //     // console.log("userID", user.id);
-    //     if (!tour.destination) return; // Kiểm tra tour.province
-    //     setIsLoadingRelatedTours(true);
-    //     try {
-    //         const relatedTours = await getTourByProvince(tour.destination, 8, user.id ); // Lấy tối đa 8 tour
-    //         const filteredTours = relatedTours.filter(t => t.tour_id !== tourId);
-    //         setTours(filteredTours); // Loại bỏ tour hiện tại
-    //         console.log("Related tours fetched:", filteredTours);
-    //     } catch (error) {
-    //         console.error("Error fetching related tours:", error);
-    //     } finally {
-    //         setIsLoadingRelatedTours(false);
-    //     }
-    // };
+   
     // Hàm lấy danh sách tour liên quan
     const fetchRelatedTours = async (destination) => {
-        if (!destination || loading || !user?.id) return; // Kiểm tra destination và user.id
         setIsLoadingRelatedTours(true);
         try {
-        const relatedTours = await getTourByProvince(destination, 8, user.id);
-        const filteredTours = relatedTours.filter((t) => t.tour_id !== tourId);
-        setTours(filteredTours);
-        console.log("Related tours fetched:", filteredTours);
+            const relatedTours = await getTourByProvince(destination, 8, (user?.id) || null); // Lấy tối đa 8 tour liên quan
+            const filteredTours = relatedTours.filter((t) => t.tour_id !== tourId);
+            setTours(filteredTours);
+            console.log("Related tours fetched:", filteredTours);
         } catch (error) {
         console.error("Error fetching related tours:", error);
         } finally {
@@ -106,8 +77,6 @@ function BookingTour(props) {
         }
     };
 
-
-   
 
     useEffect(() => {
         const fetchTour = async () => {
@@ -157,7 +126,7 @@ function BookingTour(props) {
     // Lấy tour liên quan khi tour.destination thay đổi
     useEffect(() => {
         if (tour?.destination) {
-        fetchRelatedTours(tour.destination);
+            fetchRelatedTours(tour.destination);
         }
     }, [tour?.destination, user?.id, loading]);
 
@@ -168,11 +137,28 @@ function BookingTour(props) {
         }
     };
 
-    console.log("Tour data:", tour); // Kiểm tra dữ liệu tour
+    console.log("Tour data in tour Booking:", tour); // Kiểm tra dữ liệu tour
 
+   
     const handleBookNow = () => {
-        navigate('/user/booking-info', { state: { tour: currentTour } });
+        // Kiểm tra xem user đã đăng nhập hay chưa
+        if (!user) {
+            console.log("User is not logged in. Redirecting to login page...");
+            // Lưu URL hiện tại để sau khi login có thể quay lại
+            const currentUrl = `/booking?id=${tourId}`;
+            navigate('/login', { 
+                state: { 
+                    returnUrl: currentUrl,
+                    message: "Vui lòng đăng nhập để đặt tour"
+                } 
+            });
+            return;
+        }
+
+        // Nếu đã đăng nhập, chuyển đến trang booking info
+        navigate('/user/booking-info', { state: { tour: tour, tourId: tourId , image: images[0] } });
     };
+    
 
     return (
         <div className="bookingPage" ref={bookingPageRef}>
@@ -261,7 +247,8 @@ function BookingTour(props) {
 
                      
                     </Col>
-                    <Col md={3} className="booking-card" >
+                    
+                    <Col md={3} className="booking_card" >
                         <Card className="booking-card-sticky ">
                             <Card.Header><span style={{fontWeight: 'bold', fontSize: '20px'}}>Booking</span></Card.Header>
                             <Card.Body>

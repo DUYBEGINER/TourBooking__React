@@ -25,6 +25,18 @@
             white-space: nowrap; /* Không cho phép xuống dòng */
             overflow: hidden; /* Ẩn phần nội dung bị tràn */
             text-overflow: ellipsis; /* Hiển thị dấu 3 chấm cho nội dung bị cắt */
+            &.active{
+                color: #047857;
+            }
+            &.upcoming{
+                color: #FFA432;
+            }
+            &.expired{
+                color: #FF0024;
+            }
+            &.completed{
+                color: #0167BE;
+            }
         }
         &:last-child {
             border-bottom: none; /* Xóa border-bottom cho dòng cuối cùng */

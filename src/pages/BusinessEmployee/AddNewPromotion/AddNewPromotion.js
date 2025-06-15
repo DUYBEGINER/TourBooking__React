@@ -8,6 +8,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import generateId from '../../../feature/GenerateId';
 import {createPromotion, updatePromotion} from '../../../api/promotionAPI';
 
+
 function AddNewPromotion(props) {
     const location = useLocation();
     const navigate = useNavigate();
@@ -15,15 +16,30 @@ function AddNewPromotion(props) {
     const promotionDetail = location.state?.promotionDetail || null;
     const isEditMode = !!promotionDetail;
 
+    const [successMessage, setSuccessMessage] = useState('');
+    const [showSuccess, setShowSuccess] = useState(false);
+
+
     const [values, setValues] = useState({
         promo_id: '',
         promo_name: '',
         code: '',
-        discount_percentage: '',
+        discount_percentage: 0,
         start_date: '',
         end_date: '',
         max_use: 0,
     })
+
+    // Tự động ẩn thông báo sau 1 giây
+    useEffect(() => {
+        if (showSuccess) {
+            const timer = setTimeout(() => {
+                setShowSuccess(false);
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [showSuccess]);
+
 
     useEffect(() => {
         if (!isEditMode || !promotionDetail) return;
@@ -48,11 +64,13 @@ function AddNewPromotion(props) {
         try {
             if(isEditMode) {
                 await updatePromotion(promotionData.promo_id, promotionData);
-                alert("Cập nhật khuyến mãi thành công");
+                setShowSuccess(true);
+                setSuccessMessage('Cập nhật khuyến mãi thành công');
                 return;
             }else {
                 await createPromotion(promotionData);
-                alert("Thêm khuyến mãi thành công");
+                setShowSuccess(true);
+                setSuccessMessage('Thêm khuyến mãi thành công');
                 return;
             }
         }catch{
@@ -73,6 +91,15 @@ function AddNewPromotion(props) {
 
     return (
         <>
+         <div className="alert-area" style={{ 
+                position: 'fixed', 
+                top: '50px', 
+                right: '30%', 
+                zIndex: 9999, 
+                width: '600px' 
+            }}>
+            {showSuccess && <Alert variant="success" className="text-center">{successMessage}</Alert>}
+            </div>
             <div className="go-back d-flex align-items-center pb-3" >
                 <IoIosArrowBack size={38} onClick={goBack} style={{cursor: 'pointer'}} />
                 <h2 style={{color: '#339688', fontWeight: 'bold', margin: "0"}}>Thêm khuyến mãi mới</h2>

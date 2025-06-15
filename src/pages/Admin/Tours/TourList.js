@@ -12,7 +12,7 @@ const TourManagement = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const pageSize                = 10;
-  const fetchTours = async () => ({ link: "/admin/staffManagement" });
+  //const fetchTours = async () => ({ link: "/admin/staffManagement" });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -115,7 +115,7 @@ const TourManagement = () => {
 
   return (
     <div className="p-4">
-      <h2>Quản lý tour</h2>
+      {/* <h2>Quản lý tour</h2> */}
       <div className="d-flex align-items-center mb-3" style={{gap: 12}}>
         <div style={{flex: 1, maxWidth: 320}}>
           <SearchFilter

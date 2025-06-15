@@ -6,13 +6,20 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ShowAllButton from "../Common/Button/ShowAllButton";
 import "./TourList.scss";
+import { useNavigate} from "react-router-dom";
 
 function Tourlist(props) {
+  const navigate = useNavigate();
   const { tours, isLoading, error, onChangeFavoriteTour } = props;
   console.log(tours);
   if (isLoading) return <div className="loading">Đang tải...</div>;
   if (error) return <div className="error">Lỗi: {error.message}</div>;
 
+  const values = {
+    name: "",
+    date: "",
+    budget: "",
+  }
   return (
     <div className="tourlist">
       <Container className="tourlist-container" fluid>
@@ -24,7 +31,9 @@ function Tourlist(props) {
           ))}
         </Row>
         <div className="show-all-container">
-          <ShowAllButton />
+          <ShowAllButton onClick={() => navigate("/findtour",
+            { state: { filterInfor: values } }
+          )} />
         </div>
       </Container>
     </div>

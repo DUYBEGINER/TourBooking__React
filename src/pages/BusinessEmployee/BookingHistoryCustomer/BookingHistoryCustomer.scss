@@ -1,0 +1,173 @@
+$title-color: #2563eb;
+
+.booking-history-customer {
+  background-color: white;
+  padding: 1.5rem;
+
+  .header {
+    display: flex;
+    align-items: center;
+
+    .back-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    .back-text {
+      color: #6b7280;
+    }
+  }
+
+  .content {
+    padding: 1.5rem;
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #1f2937;
+      margin-bottom: 1.5rem;
+    }
+
+    .customer-info {
+      margin-bottom: 1.5rem;
+
+      .info-row {
+        margin-bottom: 0.5rem;
+
+        .label {
+          font-weight: 600;
+        }
+      }
+    }
+
+    .tour-info-card {
+      background-color: #f9fafb;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+
+      .tour-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: $title-color;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .tour-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+
+        @media (min-width: 768px) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .info-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.75rem;
+
+          .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+
+            &.green {
+              color: #10b981;
+            }
+
+            &.blue {
+              color: #3b82f6;
+            }
+          }
+
+          .info-content {
+            .info-label {
+              font-weight: 600;
+              color: #374151;
+              margin-bottom: 0.25rem;
+            }
+
+            .info-value {
+              color: #6b7280;
+            }
+          }
+        }
+      }
+    }
+
+    .pricing-section {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+       
+        
+      @media (min-width: 1024px) {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .pricing-left {
+        // grid-column: span 1; /* Chiếm toàn bộ 2 cột trong lưới */
+        .pricing-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.5rem 0;
+
+          .pricing-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            .label-text {
+              font-weight: 500;
+            }
+
+            .quantity {
+              color: #6b7280;
+            }
+          }
+
+          .price {
+            color: #dc2626;
+            font-weight: bold;
+            flex-basis: 30%;
+          }
+
+          &.total-border {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 1rem;
+          }
+        }
+      }
+
+      .pricing-right {
+        background-color: #f9fafb;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .total-container {
+          text-align: center;
+
+          .total-label {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: $title-color;
+            margin-bottom: 0.5rem;
+          }
+
+          .total-amount {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #dc2626;
+          }
+        }
+      }
+    }
+  }
+}

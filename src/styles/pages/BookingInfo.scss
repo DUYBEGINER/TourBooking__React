@@ -1,0 +1,590 @@
+// BookingInfo Page Styles
+@import '../variables'; // Import variables
+
+// Main container spacing to avoid NavBar overlap
+.booking-info-container {
+  padding-top: calc(#{$navbar-height} + 2rem) !important;
+}
+
+// Breadcrumb/Back button styles
+.back-button {
+  color: #6b7280 !important;
+  text-decoration: none !important;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #1a237e !important;
+  }
+}
+
+.booking-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+
+  .card-header {
+    background: #f3f4f6;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 1.5rem;
+
+    .section-title {
+      color: #1a237e;
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+
+  .card-body {
+    background: #fafbfc;
+    padding: 1.5rem;
+  }
+}
+
+// Form styles
+.form-label {
+  color: #374151;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 14px;
+  transition: all 0.2s ease;
+
+  &:focus {
+    border-color: #1a237e;
+    box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+  }
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+}
+
+.validation-text {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 0.25rem;
+}
+
+// Passenger counter styles
+.passenger-type {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+
+  .passenger-icon {
+    color: #1a237e;
+    font-size: 1.25rem;
+    margin-right: 0.75rem;
+  }
+
+  .passenger-label {
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+  }
+
+  .passenger-age {
+    font-size: 12px;
+    color: #6b7280;
+  }
+
+  .counter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .counter-btn {
+      border: 1px solid #d1d5db;
+      background: white;
+      color: #374151;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+
+      &:hover:not(:disabled) {
+        border-color: #1a237e;
+        color: #1a237e;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .counter-value {
+      font-weight: 600;
+      font-size: 16px;
+      color: #374151;
+      min-width: 24px;
+      text-align: center;
+    }
+  }
+}
+
+// Passenger form styles
+.passenger-form {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  background: white;
+
+  .passenger-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+
+    .passenger-title {
+      font-weight: 600;
+      color: #1a237e;
+      font-size: 14px;
+    }
+  }
+}
+
+// Payment options styles
+.payment-options {
+  .payment-option {
+    .form-check-input {
+      border: 2px solid #d1d5db;
+      margin-top: 0.25rem;
+
+      &:checked {
+        background-color: #1a237e;
+        border-color: #1a237e;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+      }
+    }
+
+    .form-check-label {
+      font-size: 14px;
+      color: #374151;
+      font-weight: 500;
+      margin-left: 0.5rem;
+      display: flex;
+      align-items: center;
+
+      img {
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+// Terms styles
+.terms-content {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+
+  .terms-subtitle {
+    color: #1a237e;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 0.75rem;
+  }
+
+  .terms-text {
+    font-size: 13px;
+    color: #4b5563;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .terms-list {
+    font-size: 13px;
+    color: #4b5563;
+    padding-left: 1.25rem;
+    margin-bottom: 0.75rem;
+
+    li {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  .terms-footer {
+    font-size: 13px;
+    color: #1a237e;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.terms-checkbox {
+  .form-check-input {
+    border: 2px solid #d1d5db;
+
+    &:checked {
+      background-color: #1a237e;
+      border-color: #1a237e;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+    }
+  }
+
+  .form-check-label {
+    font-size: 14px;
+    color: #374151;
+    margin-left: 0.5rem;
+
+    .terms-link {
+      color: #1a237e;
+      text-decoration: none;
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// Booking summary styles
+.booking-summary {
+  position: sticky;
+  top: calc(#{$navbar-height} + 1rem);
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 999; // Thấp hơn NavBar (z-index: 1000) để không đè lên khi cuộn
+
+  .summary-header {
+    background: #f3f4f6;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 1rem 1.5rem;
+
+    h5 {
+      color: #1a237e;
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+}
+
+.tour-summary {
+  .tour-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .tour-name {
+    color: #1a237e;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+
+  .tour-details {
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 0.5rem;
+
+      .detail-label {
+        color: #6b7280;
+      }
+
+      .detail-value {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.trip-info {
+  .info-title {
+    color: #1a237e;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 0.75rem;
+  }
+
+  .info-grid {
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+      font-size: 13px;
+
+      .info-icon {
+        color: #6b7280;
+        margin-right: 0.5rem;
+        margin-top: 2px;
+        font-size: 12px;
+      }
+
+      .info-label {
+        color: #6b7280;
+        margin-bottom: 0.25rem;
+      }
+
+      .info-value {
+        color: #374151;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.pricing-summary {
+  .info-title {
+    color: #1a237e;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 0.75rem;
+  }
+
+  .price-breakdown {
+    .price-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      margin-bottom: 0.5rem;
+      color: #4b5563;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .subtotal-section {
+    border-top: 1px solid #e9ecef;
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+    
+    .price-item.subtotal {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+  }
+}
+
+.price-total {
+  border-top: 2px solid #1a237e;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+  
+  .total-label {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #1a237e;
+  }
+  
+  .total-amount {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #dc3545;
+  }
+}
+
+.book-now-btn {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 0.875rem 1.5rem;
+  transition: all 0.3s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    transform: none;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+// Promotion section styles
+.promotion-section {
+  border-top: 1px solid #e9ecef;
+  padding-top: 1rem;
+  
+  .add-promotion-btn {
+    border: 2px dashed #667eea;
+    color: #667eea;
+    background: transparent;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #667eea;
+      border-style: solid;
+      color: white;
+      transform: translateY(-1px);
+    }
+    
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+  }
+  
+  .applied-promotion {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid #28a745;
+    
+    .promotion-info {
+      margin-bottom: 0.75rem;
+      
+      .promotion-code {
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        color: #155724;
+        margin-bottom: 0.25rem;
+        
+        .remove-promotion-btn {
+          color: #dc3545;
+          text-decoration: none;
+          
+          &:hover {
+            color: #c82333;
+          }
+        }
+      }
+      
+      .promotion-description {
+        font-size: 0.875rem;
+        color: #155724;
+        margin-bottom: 0.25rem;
+        opacity: 0.8;
+      }
+      
+      .promotion-discount {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #28a745;
+      }
+    }
+    
+    .discount-amount {
+      .price-item.discount {
+        padding: 0.5rem 0;
+        border-top: 1px solid rgba(21, 87, 36, 0.2);
+        margin-top: 0.5rem;
+        font-weight: 600;
+        
+        span:last-child {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+}
+
+// Animation for promotion section
+.applied-promotion {
+  animation: promotionSlideIn 0.3s ease-out;
+}
+
+@keyframes promotionSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .booking-info-container {
+    padding-top: calc(#{$navbar-height} + 1rem) !important;
+  }
+
+  .booking-card .card-body {
+    padding: 1rem;
+  }
+
+  .passenger-type {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+
+    .counter-group {
+      align-self: flex-end;
+    }
+  }
+
+  .booking-summary {
+    position: static;
+    margin-top: 2rem;
+    top: auto; // Reset sticky position on mobile
+  }
+
+  .price-total {
+    .total-amount {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .booking-card .card-header,
+  .booking-summary .summary-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .form-input {
+    padding: 0.625rem;
+    font-size: 13px;
+  }
+} 

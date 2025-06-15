@@ -55,7 +55,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <p className="text-muted ">Thống kê</p>
+      {/* <p className="text-muted ">Thống kê</p> */}
       <div className="row stats-cards mb-4">
         <StatCard
           variant="primary"
@@ -77,16 +77,13 @@ const Dashboard = () => {
           value={overview.totalTours}
         />
       </div>
-      {/* <div >
-        <BranchTable data={branches} style={{ flex: 1 }}/>
-        <ChartDonut data={chartData} style={{ flex: 1/10 }}/>
-      </div> */}
+
       <div className="stats-chart-container row gx-4 ">
         <div className="col-lg-6 col-12 " style={{ flex: 1 }}>
           <BranchTable data={branches} />
         </div>
-        <div className=" col-lg-6 col-12 " style={{ flex: 1/10 }}>
-          <ChartDonut data={chartData} />
+        <div className=" col-lg-6 col-12 " style={{ flex: 1 }}>
+          <ChartDonut completed={chartData.completed || 0} pending={chartData.pending || 0} />
         </div>
       </div>
       <TransactionsTable data={transactions} />

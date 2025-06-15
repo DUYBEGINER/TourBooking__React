@@ -55,4 +55,37 @@ export const blockBatchPromotion = async (promotionIds) => {
     }
 }
 
+// Kiểm tra mã giảm giá
+export const checkPromotionCode = async (code) => {
+  try {
+    const response = await axios.get(`${API_URL}/promotions/check/${code}`, {
+      withCredentials: true
+    });
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error('Lỗi khi kiểm tra mã giảm giá');
+  }
+};
+
+// Áp dụng mã giảm giá cho booking
+export const applyPromotionToBooking = async (bookingId, promoId) => {
+  try {
+    const response = await axios.post(`${API_URL}/promotions/apply`, {
+      booking_id: bookingId,
+      promo_id: promoId
+    }, {
+      withCredentials: true
+    });
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error('Lỗi khi áp dụng mã giảm giá');
+  }
+};
+
 

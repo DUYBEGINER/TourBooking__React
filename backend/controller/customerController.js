@@ -1,26 +1,5 @@
 const {sql, getPool} = require("../config/db");
 
-// const getCustomer = async (req, res) => {
-//     try{
-//         const pool = await getPool();
-//         const { name } = req.query; // Lấy tham số name từ query string
-//         console.log("Name filter: ", name);
-
-//         let query = "SELECT * FROM Customer WHERE cus_status='active'";
-//         if (name) {
-//             query += " AND promo_name LIKE @name";
-//             pool.request().input("name", sql.NVarChar, `%${name}%`);
-//         }
-//         const result = await pool.request().query(query);
-//         console.log("Query result:", result);
-//         res.json(result.recordset);
-        
-//     }
-//     catch(error){   
-//         res.status(500).json({message: "Lỗi server", error});
-//     }
-// }
-
 const getCustomer = async (req, res) => {
     let pool;
     try {
@@ -45,30 +24,28 @@ const getCustomer = async (req, res) => {
     }
 };
 
-// const getCustomer = async (req, res) => {
-//     let pool;
-//     try {
-//         pool = await getPool();
-//         const { name } = req.query; // Lấy tham số name từ query string
-//         console.log("Name filter:", name);
 
-//         let query = "SELECT * FROM Customer WHERE cus_status = 'active'";
-//         const request = pool.request(); // Tạo request mới
+const getCustomerById = async (req, res) => {
+    try {
+        const pool = await getPool();
+        const cusId = req.params.id; // Lấy ID từ tham số URL
+        console.log("Customer ID:", cusId);
 
-//         if (name) {
-//             query += " AND name LIKE @name";
-//             request.input("name", sql.NVarChar, `%${name}%`); // Chỉ gắn tham số nếu dùng
-//         }
+        const result = await pool.request()
+            .input("cusId", sql.NVarChar, cusId)
+            .query("SELECT * FROM Customer WHERE cus_id = @cusId AND cus_status = 'active'");
 
-//         const result = await request.query(query); // Thực thi query
-//         console.log("Query result:", result);
-//         return res.json(result.recordset);
-//     } catch (error) {
-//         console.error("Error fetching customers:", error);
-//         return res.status(500).json({ message: "Lỗi server", error: error.message });
-//     }
-// };
+        if (result.recordset.length === 0) {
+            return res.status(404).json({ message: "Không tìm thấy khách hàng" });
+        }
 
+        console.log("Query result:", result);
+        return res.json(result.recordset[0]); // Trả về khách hàng đầu tiên
+    }catch(error) {
+        console.error("Error fetching customer by ID:", error);
+        return res.status(500).json({ message: "Lỗi server", error: error.message });
+    }
+};
 
 
 
@@ -225,6 +202,7 @@ const deleteBatchCustomer = async (req, res) => {
 
 module.exports = {
     getCustomer,
+    getCustomerById,
     blockCustomer,
     blockBatchCustomer,
     deleteBatchCustomer,

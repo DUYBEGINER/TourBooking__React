@@ -103,9 +103,11 @@ export const addBranch = async ({ branch_name, phone, address }) => {
   return res.data;
 };
 
-export const getBranchDetail = async (id) => {
+export const getBranchDetail = async (id, year = new Date().getFullYear()) => {
   try {
-    const response = await axios.get(`${API_URL}/api/admin/branches/${id}`);
+    const response = await axios.get(`${API_URL}/api/admin/branches/${id}`, {
+      params: { year }
+    });
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || "Lỗi khi lấy chi tiết chi nhánh");
@@ -138,5 +140,15 @@ export const getAllBranches = async () => {
     return response.data;
   } catch (error) {
     throw new Error(error.response?.data?.message || 'Lỗi khi lấy danh sách chi nhánh');
+  }
+};
+
+// Cập nhật trạng thái tour tự động
+export const updateTourStatus = async () => {
+  try {
+    const response = await axios.put(`${API_URL}/api/admin/tours/update-status`);
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Lỗi khi cập nhật trạng thái tour");
   }
 };

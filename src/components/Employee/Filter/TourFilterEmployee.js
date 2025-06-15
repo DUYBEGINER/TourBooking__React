@@ -38,7 +38,7 @@ function TourFilterEmployee({
     
     const handleDeleteSelected = () => {
         if (onBlockSelected && selectedItems.length > 0) {
-            onBlockSelected(selectedItems);
+            onBlockSelected();
         }
     };
 

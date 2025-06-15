@@ -1,9 +1,10 @@
 // src/pages/Admin/StaffManagement.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminDataTable from '../../../components/Admin/adminDataTable';
 import { getEmployees, lockEmployees, unlockEmployee } from '../../../api/adminAPI';
 import { Modal, Button } from 'react-bootstrap';
+import { AuthContext } from '../../../context/AuthContext';
 
 const roleMap = {
   1: 'Quản lý',
@@ -12,6 +13,7 @@ const roleMap = {
 };
 
 const StaffManagement = () => {
+  const { user } = useContext(AuthContext); // Lấy user hiện tại
   const [employees, setEmployees] = useState([]);
   const [filtered, setFiltered]   = useState([]);
   const [total, setTotal]         = useState(0);
@@ -73,8 +75,12 @@ const StaffManagement = () => {
           e.fullname.toLowerCase().includes(term)
       );
     }
+    // Loại bỏ tài khoản đang đăng nhập khỏi danh sách
+    if (user && user.emp_id) {
+      data = data.filter(e => e.emp_id !== user.emp_id);
+    }
     setFiltered(data);
-  }, [employees, searchTerm, roleFilter, branchFilter, statusFilter]);
+  }, [employees, searchTerm, roleFilter, branchFilter, statusFilter, user]);
 
   // Khóa các nhân viên đã chọn
   const handleLockSelected = async () => {
@@ -157,7 +163,7 @@ const StaffManagement = () => {
 
   return (
     <div>
-      <h2>Quản lý nhân viên</h2>
+      {/* <h2>Quản lý nhân viên</h2> */}
       
       {/* Search & Filter */}
       <div style={{ display: 'flex', gap: 12, marginBottom: 16 }}>

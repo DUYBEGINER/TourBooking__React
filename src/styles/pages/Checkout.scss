@@ -1,0 +1,88 @@
+// Payment section styles
+.payment-section {
+  .payment-option {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    
+    &:hover {
+      border-color: #007bff !important;
+      background: #f8f9fa !important;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+    }
+    
+    &.border-primary {
+      border-color: #007bff !important;
+      background: #e3f2fd !important;
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+    }
+  }
+  
+  .security-info {
+    border: 1px solid #e9ecef;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  }
+  
+  .btn-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    border: none;
+    transition: all 0.3s ease;
+    
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+      background: linear-gradient(135deg, #c82333, #dc3545);
+    }
+    
+    &:disabled {
+      opacity: 0.7;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .payment-section {
+    .payment-option {
+      font-size: 13px !important;
+      padding: 0.75rem !important;
+    }
+  }
+}
+
+// Checkout Page Styles
+@import '../variables'; // Import variables
+
+// Main container spacing to avoid NavBar overlap
+.checkout-container {
+  padding-top: calc(#{$navbar-height} + 2rem) !important;
+}
+
+// Back button styles for checkout
+.back-button-checkout {
+  color: #222 !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #1a237e !important;
+  }
+}
+
+// Responsive styles for checkout
+@media (max-width: 768px) {
+  .checkout-container {
+    padding-top: calc(#{$navbar-height} + 1rem) !important;
+  }
+  
+  .back-button-checkout {
+    font-size: 14px;
+  }
+}

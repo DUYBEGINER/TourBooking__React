@@ -32,15 +32,13 @@ function PromotionBasicInfor({values, onChange}) {
                 required={true}
               />
         </Col>
-        <Col md={{span: 4, offset: 1}}>
-            <InputFieldIcon
-                label="Mức giảm giá"
+        <Col md={{span: 2, offset: 1}}>
+            <CouterInput
+                label="Mức giảm giá (%)"
                 value={values.discount_percentage}
-                placeholder="Nhập mức giảm giá"
                 onChange={onChange}
                 name="discount_percentage"
-                required={true}
-              />
+            />
         </Col>
       </Row>
       <Row>

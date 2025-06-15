@@ -7,7 +7,8 @@
     margin-bottom: 1.5rem;
     max-width: 350px;
     min-width: 300px;
-    max-height: 320px;
+    max-height: 420px;
+    
     &__header {
       padding: 1rem 1.5rem;
       font-size: 1rem;
@@ -48,7 +49,7 @@
     &__legend {
       display: flex;
       justify-content: center;
-      margin-top: 1rem;
+      margin-top: 0.1rem;
       gap: 1.5rem;
   
       &-item {

@@ -54,7 +54,7 @@ const TourBasicInfo = ({ values, onChange }) => {
             value={values.start_date}
             name="start_date"
             onChange={onChange}
-            required={true}
+            required={true} 
           />
         </Col>
         <Col md={3}>

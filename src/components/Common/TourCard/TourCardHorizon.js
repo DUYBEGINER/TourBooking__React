@@ -48,9 +48,9 @@ function TourCardHorizon(props) {
                 </div>
                   
                 <div className="tmp">
-                    <p className="review">
+                    {/* <p className="review">
                         (584 reviews)
-                    </p>   
+                    </p>    */}
                     <Button variant="primary" onClick={handleBooking}>
                         Xem chi tiết
                     </Button>

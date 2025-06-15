@@ -10,7 +10,7 @@ const BranchManagement = () => {
   const [branches, setBranches]   = useState([]);
   const [loading, setLoading]     = useState(true);
   const [page, setPage]           = useState(1);
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  //const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const itemsPerPage              = 10;
   const navigate                  = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -46,17 +46,38 @@ const BranchManagement = () => {
     },
     { 
       header: 'Trạng thái', 
-      accessor: 'status', 
+      accessor: 'status',
+      render: row => {
+        const isActive = row.status === 'active';
+        return (
+          <span 
+            style={{
+              display: 'inline-block',
+              padding: '4px 12px',
+              borderRadius: '12px',
+              fontSize: '12px',
+              fontWeight: '600',
+              textTransform: 'uppercase',
+              letterSpacing: '0.5px',
+              backgroundColor: isActive ? '#d4edda' : '#f8d7da',
+              color: isActive ? '#155724' : '#721c24',
+              border: `1px solid ${isActive ? '#c3e6cb' : '#f5c6cb'}`
+            }}
+          >
+            {isActive ? 'Hoạt động' : 'Ngừng hoạt động'}
+          </span>
+        );
+      }
     },
     { 
       header: 'SL tour', 
       accessor: 'total_tours' 
     },
-    { 
-      header: 'Tỷ lệ huỷ', 
-      accessor: 'cancellation_rate',
-      render: row => `${row.cancellation_rate}%`
-    },
+    // { 
+    //   header: 'Tỷ lệ huỷ', 
+    //   accessor: 'cancellation_rate',
+    //   render: row => `${row.cancellation_rate}%`
+    // },
     {
       header: 'Thao tác',
       accessor: 'actions',
@@ -94,7 +115,7 @@ const BranchManagement = () => {
   return (
     <div className="p-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>Quản lý chi nhánh</h2>
+           {/* <h2>Quản lý chi nhánh</h2> */}
         <Button variant="success" onClick={handleShowModal}>Thêm mới +</Button>
       </div>
       <AdminDataTable
@@ -105,10 +126,10 @@ const BranchManagement = () => {
         currentPage={page}
         itemsPerPage={itemsPerPage}
         onPageChange={setPage}
-        rowSelection={{
-          selectedRowKeys,
-          onChange: setSelectedRowKeys        
-        }}
+        // rowSelection={{
+        //   selectedRowKeys,
+        //   onChange: setSelectedRowKeys        
+        // }}
       />
       <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>

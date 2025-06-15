@@ -27,12 +27,6 @@ function FindTour(props) {
         {key: "price_desc", name: "Giá cao đến thấp"},
     ]
 
-    // const handleFilterChange = (newFilter) => {
-    //     setFilter(prevFilter => ({
-    //         ...prevFilter,
-    //         ...newFilter
-    //     }));
-    // }
 
     const handleSort = (key) => {
         console.log("Sort by: ", key);

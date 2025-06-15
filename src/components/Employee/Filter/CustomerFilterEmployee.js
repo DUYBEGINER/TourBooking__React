@@ -18,8 +18,7 @@ function CustomerFilterEmployee(
 {   
     const handleDeleteSelected = () => {
         if (onDelete && selectedItems.length > 0) {
-            onDelete(selectedItems);
-            console.log(selectedItems);
+            onDelete();
         }
     };
     return (

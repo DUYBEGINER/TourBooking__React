@@ -19,7 +19,7 @@ const getFavoriteTours = async (req, res) => {
                 FROM Favorite_Tour ft
                 JOIN Tour t ON ft.tour_id = t.tour_id
                 LEFT JOIN Tour_price tp ON t.tour_id = tp.tour_id AND tp.age_group = 'adultPrice' 
-                WHERE ft.cus_id = @cusId AND t.status = 'active'
+                WHERE ft.cus_id = @cusId AND t.status IN ('active', 'upcoming')
             `);
        res.json(result.recordset);
     } catch (error) {

@@ -24,7 +24,7 @@ const ChartDonut = ({ completed, pending }) => {
   return (
     <div className="chart-donut">
       <div className="chart-donut__header">
-        Tỷ lệ tour đã hoàn thành / chưa khởi hành
+        Tour đã hoàn thành / chưa khởi hành
       </div>
 
       <div className="chart-donut__body">

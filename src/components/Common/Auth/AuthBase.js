@@ -12,11 +12,13 @@ const AuthBase = ({
   errorCode,
   success,
   handleSubmit,
+  handleGoogleLogin, // Hàm xử lý đăng nhập bằng Google
 }) => {
 
   const [showError, setShowError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-
+  // const clientID = process.env.GOOGLE_CLIENT_AUTH_ID;
+  // console.log("Google Client ID:", clientID); // Log the client ID to verify it's being set correctly
 
   // Effect để xử lý hiển thị và tự động ẩn thông báo thành công
   useEffect(() => {
@@ -70,11 +72,14 @@ const AuthBase = ({
             )}
           </div>
 
-          <form onSubmit={handleSubmit} className="auth__form grid" autocomplete="on">
+          <form onSubmit={handleSubmit} className="auth__form grid" autoComplete="on">
             {children}
-
-            {/* <span className="auth__separator">Hoặc</span>
-            <SocialLogin /> */}
+            {!isRegister && (
+              <>
+                <span className="auth__separator">Hoặc</span>
+                <SocialLogin handleGoogleSignIn={handleGoogleLogin} />
+              </>
+            )}
             <div className="auth__switch-message">
               {isRegister
                 ? <p>Đã có tài khoản? <Link to="/login"><span className="auth__link">Đăng nhập ngay</span></Link></p>

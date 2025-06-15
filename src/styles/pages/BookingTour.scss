@@ -52,14 +52,13 @@
         font-weight: bold;
         margin-bottom: 20px;
     }
-    .booking-card {
-      // border: 1px solid #0a47f0;
-      // min-height: 100vh;
+    .booking_card {
+      min-height: 100vh;
       .booking-card-sticky {
-        margin-top: 100px;
-        position: sticky;
-        top: calc(#{$navbar-height} + 50px); /* Khoảng cách từ top để tránh bị Navbar che khuất */
-        z-index: 1; /* Đảm bảo card không bị các phần tử khác đè lên */
+        // margin-top: 100px !important; /* Đảm bảo card không bị Navbar che khuất */
+        position: sticky ;
+        top: calc(#{$navbar-height} + 120px); /* Khoảng cách từ top để tránh bị Navbar che khuất */
+        z-index: 1 ; /* Đảm bảo card không bị các phần tử khác đè lên */
         box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.1);
       }
     }
@@ -72,8 +71,6 @@
       list-style: circle;
     }
   }
-
-
 }
 
 

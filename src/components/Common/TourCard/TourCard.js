@@ -14,10 +14,10 @@ function TourCard(props) {
     const { onFavoriteChange } = props;
     const { user } = useContext(AuthContext);
     // const [tourFavorite, setTourFavorite] = useState(false);
-    const { tour_id, is_favorite, fav_id } = props;
+    const { tour_id, fav_id } = props;
     // const [isFavorite, setIsFavorite] = React.useState(is_favorite || false);
     const isFavorite = props.is_favorite;
-    const [currentFavId, setCurrentFavId] = React.useState(fav_id || null);
+    // const [currentFavId, setCurrentFavId] = React.useState(fav_id || null);
     const navigate = useNavigate();    
     
     const handleToggleFavorite = async () => {
@@ -32,14 +32,14 @@ function TourCard(props) {
                 // Xóa tour khỏi danh sách yêu thích
                 await deleteFavoriteTour(fav_id);
                 // setIsFavorite(false);
-                setCurrentFavId(null);
+                // setCurrentFavId(null);
                 console.log("Tour removed from favorites");
             } else {
                 // Thêm tour vào danh sách yêu thích
                 const newFavId = generateId();
                 await addFavoriteTour(newFavId, user.id, tour_id);
                 // setIsFavorite(true);
-                setCurrentFavId(newFavId);
+                // setCurrentFavId(newFavId);
                 console.log("Tour added to favorites");
             }
            

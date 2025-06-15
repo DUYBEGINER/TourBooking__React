@@ -1,0 +1,130 @@
+@import '../variables';
+
+.aboutus-container {
+  padding-top: calc(#{$navbar-height} + 2rem);
+  padding-bottom: 2rem;
+}
+
+.aboutus-breadcrumb {
+  font-size: 15px;
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  .aboutus-breadcrumb-divider {
+    color: #bdbdbd;
+    font-size: 16px;
+  }
+}
+
+.aboutus-card {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+
+.aboutus-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  filter: blur(0.5px) brightness(0.95);
+}
+
+.aboutus-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #1a237e;
+  margin-bottom: 1rem;
+}
+
+.aboutus-section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a237e;
+}
+
+.aboutus-desc {
+  font-size: 1.08rem;
+  color: #222;
+  margin-bottom: 0.7rem;
+  line-height: 1.7;
+}
+
+.aboutus-list {
+  font-size: 1.08rem;
+  color: #222;
+  padding-left: 1.5rem;
+  margin-bottom: 1.2rem;
+  li {
+    margin-bottom: 0.5rem;
+    font-size: 1.08rem;
+    line-height: 1.6;
+  }
+}
+
+.aboutus-footer {
+  background: #16213e;
+  color: #fff;
+  padding: 2.5rem 0 1.2rem 0;
+  margin-top: 3rem;
+  .footer-section {
+    margin-bottom: 1.5rem;
+  }
+  .footer-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+  .footer-link {
+    font-size: 14px;
+    color: #e0e0e0;
+    margin-bottom: 0.3rem;
+    cursor: pointer;
+    &:hover {
+      color: #ffda32;
+      text-decoration: underline;
+    }
+  }
+  .footer-select {
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    padding: 0.4rem 0.7rem;
+    font-size: 14px;
+    margin-bottom: 0.5rem;
+  }
+  .footer-payments img {
+    max-width: 160px;
+    border-radius: 6px;
+    background: #fff;
+    padding: 4px 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutus-container {
+    padding-top: calc(#{$navbar-height} + 1rem);
+    padding-bottom: 1rem;
+  }
+  .aboutus-img {
+    height: 180px;
+  }
+  .aboutus-title {
+    font-size: 1.4rem;
+  }
+  .aboutus-section-title {
+    font-size: 1.1rem;
+  }
+  .aboutus-desc, .aboutus-list li {
+    font-size: 0.98rem;
+  }
+  .aboutus-footer {
+    padding: 1.5rem 0 0.7rem 0;
+  }
+} 
