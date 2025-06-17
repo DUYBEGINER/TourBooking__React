@@ -202,7 +202,7 @@ const updatePromotion = async (req, res) => {
             return res.status(400).json({ message: "Mã khuyến mãi đã tồn tại" });
         }
 
-        console.log("Promotion ID: ", promotionId);
+         console.log("Promotion ID: ", promotionId);
         console.log("Promotion data: ", req.body);
         const pool = await getPool();
         const result = await pool.request()

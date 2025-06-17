@@ -39,9 +39,8 @@ function BookingTour(props) {
     const [isLoadingRelatedTours, setIsLoadingRelatedTours] = useState(false); // Loading cho tour liên quan
     const [schedules, setSchedules] = useState([]);
     const [stats, setStats] = useState({}); // Lưu trữ thống kê đánh giá của tour
-    
+
     const navigate = useNavigate();
-    
 
      // Chuyển hướng về trang không được phép nếu không có tourId
     useEffect(() => {

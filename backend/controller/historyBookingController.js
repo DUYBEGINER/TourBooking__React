@@ -33,7 +33,6 @@ const getHistoryBooking = async (req, res) => {
                 b.status, 
                 t.name,
                 t.start_date
-
         `;
         
         const request = transaction.request();
