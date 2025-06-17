@@ -86,7 +86,7 @@ function TourCard(props) {
                 <ul className="tour-card__details">
                     <li>
                         <p>
-                            <FontAwesomeIcon icon={faClock} /> Thời lượng: {props.duration}
+                            <FontAwesomeIcon icon={faClock} /> Thời lượng: {props.duration} ngày {props.duration - 1} đêm
                         </p>
                     </li>
                     <li>

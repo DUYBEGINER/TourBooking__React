@@ -11,7 +11,7 @@ import { useNavigate} from "react-router-dom";
 function Tourlist(props) {
   const navigate = useNavigate();
   const { tours, isLoading, error, onChangeFavoriteTour } = props;
-  console.log(tours);
+  console.log("tour list: ", tours);
   if (isLoading) return <div className="loading">Đang tải...</div>;
   if (error) return <div className="error">Lỗi: {error.message}</div>;
 

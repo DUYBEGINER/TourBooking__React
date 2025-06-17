@@ -54,17 +54,18 @@ const createBooking = async (req, res) => {
             });
         }
 
-        const bookingDate = moment().tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD HH:mm:ss');
+        // // const bookingDate = moment().tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD HH:mm:ss');
+        // const bookingDate = moment.tz('Asia/Ho_Chi_Minh').toDate(); // Lấy thời gian hiện tại Asia/Ho Chi Minh
+        // console.log('Booking date:', bookingDate);
 
         // Tạo booking mới
         await pool.request()
             .input('booking_id', sql.VarChar(20), booking_id)
             .input('cus_id', sql.VarChar(20), cus_id)
             .input('tour_id', sql.VarChar(20), tour_id)
-            .input('booking_date', sql.DateTime, bookingDate)
             .query(`
                 INSERT INTO Booking (booking_id, cus_id, tour_id, booking_date, total_price, status)
-                VALUES (@booking_id, @cus_id, @tour_id, @booking_date, 0.0, 'pending')
+                VALUES (@booking_id, @cus_id, @tour_id, GETDATE(), 0.0, 'pending')
             `);
 
         res.status(201).json({
