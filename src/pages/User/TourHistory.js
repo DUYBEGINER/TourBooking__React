@@ -1,61 +1,117 @@
-import React from 'react';
+    import React, { useState, useEffect, useContext } from 'react';
+import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { getHistoryBooking } from '../../api/historyBookingAPI';
+import Navbar from '../../layouts/Navbar';
+import Footer from '../../layouts/Footer';
 import '../../styles/pages/TourHistory.scss';
+import { FaCalendarAlt, FaMapMarkerAlt, FaMoneyBillWave, FaRegClock } from 'react-icons/fa';
 
-function TourHistory(props) {
-    // Dữ liệu giả cho lịch sử đặt tour
-    const tourHistory = [
-        {
-            id: 1,
-            tourName: "Du lịch Đà Lạt 3N2Đ",
-            bookingDate: "2025-05-20",
-            startDate: "2025-06-01",
-            price: 3500000,
-            status: "Đã xác nhận",
-            image: "https://placehold.co/300x200?text=Da+Lat+Tour"
-        },
-        {
-            id: 2,
-            tourName: "Khám phá Phú Quốc 4N3Đ",
-            bookingDate: "2025-04-15",
-            startDate: "2025-05-10",
-            price: 5500000,
-            status: "Đang chờ",
-            image: "https://placehold.co/300x200?text=Phu+Quoc+Tour"
-        },
-        {
-            id: 3,
-            tourName: "Hà Nội - Hạ Long 2N1Đ",
-            bookingDate: "2025-03-10",
-            startDate: "2025-04-01",
-            price: 2500000,
-            status: "Đã hủy",
-            image: "https://placehold.co/300x200?text=Ha+Long+Tour"
+function TourHistory() {
+    const { user, loading } = useContext(AuthContext);
+    const [tourHistory, setTourHistory] = useState([]);
+    const [error, setError] = useState(null);
+    const [isFetching, setIsFetching] = useState(true);
+    const navigate = useNavigate();
+
+    const STATUS_LABELS = {
+        pending: 'Chờ xác nhận',
+        confirmed: 'Đã xác nhận',
+        cancelled: 'Đã hủy',
+    };
+
+    useEffect(() => {
+        if (!loading) {
+            if (!user) {
+                console.log('User is not logged in. Redirecting to login page...');
+                navigate('/login', { state: { returnUrl: '/historyBooking' } });
+            } else {
+                const fetchTourHistory = async () => {
+                    try {
+                        setIsFetching(true);
+                        const data = await getHistoryBooking(user.id);
+                        if (!Array.isArray(data)) {
+                            throw new Error('Dữ liệu trả về không phải là mảng');
+                        }
+                        setTourHistory(data);
+                    } catch (err) {
+                        setError(err.message || 'Không thể tải lịch sử đặt tour');
+                    } finally {
+                        setIsFetching(false);
+                    }
+                };
+                fetchTourHistory();
+            }
         }
-    ];
+    }, [user, loading, navigate]);
 
     return (
-        <div className="tour-history-container">
-            <h1>Lịch sử đặt tour</h1>
-            {tourHistory.length === 0 ? (
-                <p>Chưa có lịch sử đặt tour.</p>
-            ) : (
-                <div className="tour-list">
-                    {tourHistory.map(tour => (
-                        <div key={tour.id} className="tour-card">
-                            <img src={tour.image} alt={tour.tourName} className="tour-image" />
-                            <div className="tour-info">
-                                <h3>{tour.tourName}</h3>
-                                <p><strong>Ngày đặt:</strong> {tour.bookingDate}</p>
-                                <p><strong>Ngày khởi hành:</strong> {tour.startDate}</p>
-                                <p><strong>Giá:</strong> {tour.price.toLocaleString('vi-VN')} VNĐ</p>
-                                <p className={`status ${tour.status.replace(' ', '-').toLowerCase()}`}>
-                                    <strong>Trạng thái:</strong> {tour.status}
-                                </p>
-                            </div>
+        <div>
+            <Navbar />
+            <div className="tour-history__banner">
+                <Container className="tour_history">
+                    {loading || isFetching ? (
+                        <div className="text-center mt-5">
+                            <Spinner animation="border" />
                         </div>
-                    ))}
-                </div>
-            )}
+                    ) : (
+                        <>
+                            <h2 className="tour-history__title text-center">Các Tour Bạn Đã Đặt:</h2>
+                            {error && (
+                                <Alert variant="danger" className="text-center mt-4">
+                                    {error}
+                                </Alert>
+                            )}
+                            {tourHistory.length === 0 && !error && (
+                                <Alert variant="info" className="text-center mt-4">
+                                    Bạn chưa có lịch sử đặt tour nào.
+                                </Alert>
+                            )}
+                            {tourHistory.length > 0 && (
+                                <Row className="g-4 mt-4" xs={1}>
+                                    {tourHistory.map((tour) => (
+                                        <Col key={tour.booking_id}>
+                                            <div className="tour-card-horizontal">
+                                                <img
+                                                    src={tour.image || 'https://placehold.co/300x200?text=No+Image'}
+                                                    alt={tour.tour_name}
+                                                    className="tour-card-horizontal__image"
+                                                />
+                                                <div className="tour-card-horizontal__content">
+                                                    <h3 className="tour-card-horizontal__title">{tour.tour_name || 'Tên tour không có'}</h3>
+                                                    <div className="tour-card-horizontal__info">
+                                                        <div className="tour-info-row">
+                                                            <span><FaRegClock /> Thời gian: {tour.duration ? tour.duration + 'N' : 'N/A'}</span>
+                                                            <span><FaMapMarkerAlt /> Khởi hành: {tour.departure_location || 'N/A'}</span>
+                                                        </div>
+                                                        <div className="tour-info-row">
+                                                            <span><FaCalendarAlt /> Ngày khởi hành: {tour.start_date ? new Date(tour.start_date).toLocaleDateString('vi-VN') : 'N/A'}</span>
+                                                            <span><FaCalendarAlt /> Ngày đặt: {tour.booking_date ? new Date(tour.booking_date).toLocaleDateString('vi-VN') : 'N/A'}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div className="tour-card-horizontal__price">
+                                                        <FaMoneyBillWave /> Thành tiền: <span>{tour.total_price ? tour.total_price.toLocaleString('vi-VN') + ' đ' : 'Chưa xác định'}</span>
+                                                    </div>
+                                                    <div className="tour-card-horizontal__footer">
+                                                        <button className={`btn-detail ${tour.status}`}> 
+                                                            {STATUS_LABELS[tour.status] || tour.status || 'Không rõ'}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Col>
+                                    ))}
+                                </Row>
+                            )}
+                            <div className="text-center mt-4">
+                                <button className="btn-show-more">Hiển thị thêm</button>
+                            </div>
+                        </>
+                    )}
+                </Container>
+            </div>
+            <Footer />
         </div>
     );
 }
