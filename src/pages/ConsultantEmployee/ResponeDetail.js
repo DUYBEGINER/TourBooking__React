@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Mail, Phone, MapPin, ArrowLeft, Send } from 'lucide-react';
 import { useConsultantSupport } from '../../context/ConsultantSupportContext';
+import { AuthContext } from '../../context/AuthContext';
 import "../../styles/consultant/ResponeDetail.scss";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -21,9 +22,7 @@ const ResponeDetail = () => {
     const [response, setResponse] = useState("");
     const editorRef = useRef(null);
     const { supportRequests, sendResponse } = useConsultantSupport();
-
-    // Giả lập employeeId, thực tế nên lấy từ context đăng nhập
-    const employeeId = 'EMP003';
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         const foundRequest = supportRequests.find(r => String(r.request_id) === String(id));
@@ -59,7 +58,7 @@ const ResponeDetail = () => {
                 await sendResponse({
                     response_id: responseId,
                     request_id: request.request_id,
-                    emp_id: employeeId,
+                    emp_id: user.id,
                     re_message: response,
                     day: new Date().toISOString(),
                     customer_email: request.email,
@@ -69,7 +68,7 @@ const ResponeDetail = () => {
                 if (editorRef.current) {
                     editorRef.current.innerText = "";
                 }
-                navigate('/consultantemployee');
+                navigate('/consultantemployee/request-support');
             } catch (err) {
                 alert(err.message || 'Gửi phản hồi thất bại!');
             }
