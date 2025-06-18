@@ -36,8 +36,19 @@ function Login() {
 
   //Hàm xử lí đăng nhập google
   const handleGoogleLogin = async (credentialResponse) => {
+    try{
+      setError(null);
+      setErrorCode(null);
       const user = await loginWithGoogle(credentialResponse.credential);
       console.log("Google login response:", user);
+       //Reset lại các state
+      setSuccess("Đăng nhập thành công!");
+    }catch (error) {
+      setSuccess(null);
+      setErrorCode(error.code);
+      setError(error.message);
+      console.error("Google login error:", error);
+    }
   }
 
   const handleSubmit = async (e) => {

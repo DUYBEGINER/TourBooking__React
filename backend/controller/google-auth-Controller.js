@@ -68,6 +68,12 @@ const loginGoogle = async (req, res) => {
 
         //Nếu người dùng đã tồn tại, trả về thông tin và token để đăng nhập
         if( account.recordset.length > 0) {
+            if( account.recordset[0].cus_status !== "active") {
+                return res.status(401).json({
+                    code: "account_locked",
+                    message: "Tài khoản của bạn đã bị khoá, vui lòng liên hệ quản trị viên để biết thêm chi tiết."
+                });
+            }
             console.log("Người dùng đã tồn tại trong cơ sở dữ liệu.");
             // Người dùng đã tồn tại, có thể tạo phiên làm việc hoặc trả về thông tin người dùng
             const user = account.recordset[0];
