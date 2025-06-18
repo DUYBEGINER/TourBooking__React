@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
-const axios = require('axios');
+
 // const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 const app = express();
@@ -22,7 +22,6 @@ const promotionRoutes = require("./routes/promotionRoutes");
 const scheduleRoutes = require("./routes/scheduleRoutes");
 const customerSupportRoutes = require("./routes/customerSupportRoutes");
 const consultantSupportRoutes = require("./routes/consultantSupportRoutes");
-const chatRoutes = require("./routes/chatRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const favoriteTourRoutes = require("./routes/favoriteTourRoutes");
 const historyBookingRoutes = require("./routes/historyBookingRoutes");
@@ -39,7 +38,6 @@ app.use(cookieParser());
 app.use('/uploads', express.static('uploads'));
 
 //Sử dụng các Route
-app.use("/chat", chatRoutes);
 app.use("/tours", tourRoutes);
 app.use("/promotions", promotionRoutes);
 app.use("/auth", authRoutes);

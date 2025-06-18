@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mssqlserver:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Duy2592004!?
+      - MSSQL_PID=Developer
+      - TZ=Asia/Ho_Chi_Minh
+    ports:
+      - "1435:1433"
+    expose:
+      - "1433"
+    volumes:
+      - sqlvolume:/var/opt/mssql
+      - ./init:/init
+
+
+  mssqltools:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - mssqlserver
+    volumes:
+      - ./init:/init
+    entrypoint: /bin/bash -c "
+      echo 'Waiting for SQL Server...'; sleep 20;
+      /opt/mssql-tools/bin/sqlcmd -S mssqlserver -U SA -P 'Duy2592004!?' -i /init/sql_createTable.sql;
+      echo 'SQL scripts executed.'"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      - DB_PORT=1433
+      - DB_SERVER=mssqlserver
+      - TZ=Asia/Ho_Chi_Minh
+    ports:
+      - "3002:3001"
+    depends_on:
+      - mssqlserver
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  sqlvolume:

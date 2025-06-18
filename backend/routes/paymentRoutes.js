@@ -7,6 +7,10 @@ router.post('/create-payment-url', async (req, res) => {
   try {
     const { bookingId, amount, customerInfo, tourInfo, bankCode, paymentMethod = 'VNPAY' } = req.body;
     
+    console.log('📝 Creating payment URL with params:', 
+      { bookingId, amount, customerInfo, tourInfo, bankCode, paymentMethod });
+
+      
     // Validate input
     if (!bookingId || !amount || !customerInfo || !tourInfo) {
       return res.status(400).json({

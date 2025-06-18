@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_BASE_URL = 'http://localhost:3002';
 
 // Tạo URL thanh toán VNPay
 export const createPaymentUrl = async (paymentData) => {

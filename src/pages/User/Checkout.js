@@ -187,6 +187,7 @@ const Checkout = () => {
       const result = await createPaymentUrl(bookingData);
 
       if (result.success) {
+        console.log('VNPay Payment URL:', result.paymentUrl);
         // Chuyển hướng đến VNPay
         window.location.href = result.paymentUrl;
       } else {

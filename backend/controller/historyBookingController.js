@@ -19,6 +19,14 @@ const getHistoryBooking = async (req, res) => {
                 b.total_price,
                 t.name AS tour_name,
                 t.start_date,
+                t.duration,
+                t.departure_location,
+                t.end_date,
+                (SELECT TOP 1 image_url 
+                    FROM Tour_image ti 
+                    WHERE ti.tour_id = t.tour_id 
+                    ORDER BY image_id ASC
+                ) AS cover_image,
                 SUM(bd.quantity) AS number_of_guests
             FROM Booking b
             JOIN Tour t ON b.tour_id = t.tour_id
@@ -32,7 +40,12 @@ const getHistoryBooking = async (req, res) => {
                 b.booking_date, 
                 b.status, 
                 t.name,
-                t.start_date
+                t.tour_id,
+                t.start_date,
+                t.duration,
+                t.departure_location,
+                t.end_date
+            ORDER BY b.booking_date DESC
         `;
         
         const request = transaction.request();

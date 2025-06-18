@@ -40,17 +40,30 @@ class VNPayUtils {
     return signed;
   }
 
-  // Format date cho VNPay (yyyyMMddHHmmss)
   static formatDate(date) {
+    const vnTime = date.toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+    console.log('Input date (VN time):', vnTime);
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
     const seconds = String(date.getSeconds()).padStart(2, '0');
-    
-    return `${year}${month}${day}${hours}${minutes}${seconds}`;
+    const formattedDate = `${year}${month}${day}${hours}${minutes}${seconds}`;
+    console.log('Formatted date:', formattedDate);
+    return formattedDate;
   }
+  // // Format date cho VNPay (yyyyMMddHHmmss)
+  // static formatDate(date) {
+  //   const year = date.getFullYear();
+  //   const month = String(date.getMonth() + 1).padStart(2, '0');
+  //   const day = String(date.getDate()).padStart(2, '0');
+  //   const hours = String(date.getHours()).padStart(2, '0');
+  //   const minutes = String(date.getMinutes()).padStart(2, '0');
+  //   const seconds = String(date.getSeconds()).padStart(2, '0');
+    
+  //   return `${year}${month}${day}${hours}${minutes}${seconds}`;
+  // }
 
   // Làm sạch orderInfo để tránh lỗi invalid data format
   static sanitizeOrderInfo(orderInfo) {
@@ -69,7 +82,9 @@ class VNPayUtils {
     const date = new Date();
     const createDate = this.formatDate(date);
     const expireDate = this.formatDate(new Date(date.getTime() + 15 * 60 * 1000));
-
+    console.log("createDate:", createDate);
+    console.log("expireDate:", expireDate);
+    
     // Làm sạch orderInfo
     const cleanOrderInfo = this.sanitizeOrderInfo(orderInfo);
 
