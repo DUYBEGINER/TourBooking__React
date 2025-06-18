@@ -22,6 +22,7 @@ const TourManagement = () => {
         const { tours: fetchedTours, total: fetchedTotal } = await getTour({ page, pageSize });
         setTours(fetchedTours);
         setTotal(fetchedTotal);
+        console.log('Danh sách tour:', fetchedTours);
       } catch (err) {
         console.error('Lỗi khi lấy danh sách tour:', err);
       } finally {

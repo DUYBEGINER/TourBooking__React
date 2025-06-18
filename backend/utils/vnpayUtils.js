@@ -69,7 +69,8 @@ class VNPayUtils {
     const date = new Date();
     const createDate = this.formatDate(date);
     const expireDate = this.formatDate(new Date(date.getTime() + 15 * 60 * 1000));
-
+    console.log("createDate:", createDate);
+    console.log("expireDate:", expireDate);
     // Làm sạch orderInfo
     const cleanOrderInfo = this.sanitizeOrderInfo(orderInfo);
 
